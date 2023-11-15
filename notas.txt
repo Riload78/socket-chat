@@ -1,0 +1,76 @@
+Instalcion de modules NPM 
+//===============================
+{
+  "name": "socket-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "esLintConfig": {
+    "extends": "standard"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js --exec babel-node"
+  },
+  "author": "Riload",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.23.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "standard": "^17.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.3",
+    "@babel/node": "^7.22.19",
+    "@babel/preset-env": "^7.23.3",
+    "nodemon": "^3.0.1"
+  }
+}
+
+Se instala babel para procesar los archivos js, ya que hay alguna librerias qnue no son compatibles con el ems-module
+Hay que generar un archivo de configuración de Babel .babelrc para usar bebel
+
+
+Estructura
+//=============================
+app.js -> Servidor con express
+index.js -> Es el atchivo que ejecuta la aplicación
+
+El proyecto necesita dos servidores: el de express y el de socket io
+El de socket io lo montamos en el index.js
+
+Para comprobar que el servidor de socket io esta funcionando puedo ingresar esta url para leer el js de socket io
+
+Añadir archivos del front
+//==============================
+en el server de express declaro el la ruta que va usar el servidor usando la libreia path de node 
+para conseguitr la ruta absoluta
+    app.use(express.static(path.join(__dirname, 'public')))
+
+Creacion BBDD con Mongo
+//===========================
+Crear la conexión en db.js e importarlo en el index.js
+Creacion del schema con mongoose
+
+Configuracion del servidor cliente socket
+//=================================
+Para añadir el servidor de socket.io en el front hay que importar en el html el script:
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/main.js"></script>
+Con esto tenemos el objeto io ya en el navegador por lo que puedo crer un obketo en el main.js 
+y se puede conectar con el back
+
+Configuracion del servidor backend socket
+//=================================
+En el index.js importamos la funcion sockets al que le pasamos el objeto io
+
+BBDD
+//=================================
+Incorporar la BBDD cuando la aplicación arranque -> En el evento connection del archivo sockets
+Hacer una consulta a la BBDD para traerse las notas guardaas
+
+
+

@@ -1,11 +1,11 @@
 import { Schema, model } from "mongoose"
 
-new Schema({
+const noteSchema = new Schema({
 	title: {
 		type: String,
 		required: true,
 	},
-	desceiption: {
+	description: {
 		type: String,
 		require: true
 	}
@@ -13,4 +13,4 @@ new Schema({
 	timestamps: true
 })
 
-export default model('Note', schema)
+export default model('Note', noteSchema)

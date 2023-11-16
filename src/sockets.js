@@ -1,28 +1,33 @@
 import Note from './models/Note'
 
 
+
 const sockets = (io) => {
-    io.on('connection', (socket) => {
-        console.log('New user connection')
+	io.on('connection', (socket) => {
+		console.log('New user connection')
 
-        const emitNotes = async () => {
-            // recupero las notas de la BBDD
-            const notes = await Note.find()
-            console.log(notes);
+		const emitNotes = async () => {
+			// recupero las notas de la BBDD
+			const notes = await Note.find()
+			console.log(notes);
 
-            // creo un evento para que envie las notas
-            io.emit('loadnotes', notes)
-        }
+			// creo un evento para que envie las notas
+			io.emit('server:loadnotes', notes)
+		}
 
-        emitNotes()
-        // recibe el evetno savenote del front
-        socket.on('savenote', async data => {
-            // guardo en BBDD
-            const newNote = new Note(data)
-            await newNote.save()
+		emitNotes()
 
-        })
-    })
+
+		// recibe el evetno savenote del front
+		socket.on('client:savenote', async data => {
+			// guardo en BBDD
+			const newNote = new Note(data)
+			const result = await newNote.save()
+
+			socket.emit('server:newnote', result)
+
+		})
+	})
 }
 
 export default sockets

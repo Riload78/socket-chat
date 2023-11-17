@@ -1,13 +1,19 @@
 const socket = io()
 
+/**
+ * Escuchador del evento loadnotes que trae las notas
+ * @param {*} callback 
+ */
 export const loadnotes = (callback) => {
-	// Escuchador del evento loadnotes que trae las notas
 	socket.on('server:loadnotes', callback)
 }
 
-// Evento para enviar una nueva nota al servidor y actualizarla en el cliente
+/**
+ * Emisor del evento addnote para agregar una nueva nota
+ * @param {*} title 
+ * @param {*} description 
+ */
 export const savenote = (title, description) => {
-	// Escuchador del evento addnote para agregar una nueva nota
 	socket.emit('client:savenote', {
 		title: title,
 		description: description
@@ -15,7 +21,23 @@ export const savenote = (title, description) => {
 	console.log('savenote emit');
 }
 
-
+/**
+ * Escuchador del evento de creacion de nota
+ * @param {*} callback 
+ */
 export const onNewNote = (callback) => {
 	socket.on('server:newnote', callback)
 }
+
+
+/**
+ * Emisor del evento DELETE NOTE
+ */
+export const deleteNote = (id) => {
+	socket.emit('client:deletenote', id)
+}
+
+// Escuchador de eliminación de nota
+// export const onDeleteNote = id => {
+// 	socket.on('server:deletenote', id)
+// }

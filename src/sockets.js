@@ -5,7 +5,9 @@ import Note from './models/Note'
 const sockets = (io) => {
 	io.on('connection', (socket) => {
 		console.log('New user connection')
-
+		/**
+		 * 
+		 */
 		const emitNotes = async () => {
 			// recupero las notas de la BBDD
 			const notes = await Note.find()
@@ -17,15 +19,24 @@ const sockets = (io) => {
 
 		emitNotes()
 
-
-		// recibe el evetno savenote del front
+		/**
+		 * recibe el evetno savenote del front
+		 */
 		socket.on('client:savenote', async data => {
 			// guardo en BBDD
 			const newNote = new Note(data)
 			const result = await newNote.save()
-
+			// creo emisor para pintar en el fron la nota
 			socket.emit('server:newnote', result)
 
+		})
+
+		socket.on('client:deletenote', async id => {
+			console.log(id);
+			// elimino de la BBDD
+			await Note.deleteOne({ _id: id })
+			// Llamo al evento emit Note para que genere de nuevo las notas
+			emitNotes()
 		})
 	})
 }

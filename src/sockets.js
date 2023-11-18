@@ -27,7 +27,10 @@ const sockets = (io) => {
 			const newNote = new Note(data)
 			const result = await newNote.save()
 			// creo emisor para pintar en el fron la nota
-			socket.emit('server:newnote', result)
+			// con socket solo refresca la pestaña del front
+			// con io refresca todas las pestañas abiertas
+			// socket.emit('server:newnote', result)
+			io.emit('server:newnote', result)
 
 		})
 

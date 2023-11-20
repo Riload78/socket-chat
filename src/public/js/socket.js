@@ -18,7 +18,6 @@ export const savenote = (title, description) => {
 		title: title,
 		description: description
 	})
-	console.log('savenote emit');
 }
 
 /**
@@ -37,7 +36,29 @@ export const deleteNote = (id) => {
 	socket.emit('client:deletenote', id)
 }
 
-// Escuchador de eliminación de nota
-// export const onDeleteNote = id => {
-// 	socket.on('server:deletenote', id)
-// }
+/**
+ * 
+ */
+export const getNoteById = (id) => {
+	socket.emit('client:getnote', id)
+}
+
+/**
+ * Emisor del evento UPDATE NOTE
+ */
+export const updateNote = (id, title, description) => {
+	console.log(id);
+	socket.emit('client:updatenote', {
+			_id: id, 
+			title, 
+			description
+		})
+}
+
+export const onSelectedNote = (callback) => {
+	socket.on('server:selectednote', callback)
+}
+
+
+
+

@@ -3,11 +3,7 @@ import {Server as WebsocketServer} from 'socket.io'
 import http from 'http'
 import connectDB from './db'
 import sockets from './sockets'
-
-
-const port = process.env.PORT || 3001;
-
-
+import {PORT} from './config'
 
 // conexion con la BBDD
 connectDB()
@@ -18,8 +14,8 @@ connectDB()
 // server de node
 const server = http.createServer(app)
 // seerver de express
-const httpServer = server.listen(port, () => {
-	console.log('Server is running on port 3000')
+const httpServer = server.listen(PORT, () => {
+	console.log(`Server is running on port ${PORT}`)
 })
 // server de socket io
 const io = new WebsocketServer(httpServer)

@@ -46,7 +46,7 @@ const sockets = (io) => {
 
 		socket.on('client:deletenote', async id => {
 			try {
-				console.log(id);
+
 				// elimino de la BBDD
 				await Note.deleteOne({ _id: id })
 				// Llamo al evento emit Note para que genere de nuevo las notas
@@ -60,9 +60,9 @@ const sockets = (io) => {
 		socket.on('client:getnote', async (id) => {
 			try {
 				
-				// busco la nota a editar
+				// find edit note
 				const note = await Note.findById(id)
-				// lo devuelvo al cliente
+				// send event to client
 				socket.emit('server:selectednote', note)
 				
 			} catch (error) {

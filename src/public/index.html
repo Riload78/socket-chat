@@ -3,19 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/main.css">
     <title>Socket Crud</title>
 </head>
 <body>
-    <h1>Socket Crrud</h1>
-
-    <form id="note-form">
-        <input type="text" id="title" placeholder="Título">
-        <textarea name="description" id="description" cols="30" rows="3"></textarea>
-        <button type="submit">Enviar</button>
-    </form>
-    <div id="notes"></div>
+    <div class="main">
+        <header class="header">
+            <h1>Socket Crud</h1>
+        </header>
+        <div class="container">
+            <div class="form-wrapper">
+                <form id="note-form" class="form">
+                    <input type="text" id="title" placeholder="Título">
+                    <textarea name="description" id="description" cols="30" rows="3"></textarea>
+                    <button class="full" type="submit">Enviar</button>
+                </form>
+            </div>
+            <div id="notes" class="notes-wrapper"></div>
+        </div>
+    </div>
     
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="./socket.io/socket.io.js"></script>
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>

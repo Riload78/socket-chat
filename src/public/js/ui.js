@@ -9,10 +9,10 @@ let savedId = ''
 const renderNote = note => {
 	const div = document.createElement('div')
 	div.innerHTML = `
-			<div>
+			<div class="item">
 				<h2>${note.title}</h2>
 				<p>${note.description}</p>
-				<div>
+				<div class="action">
 					<button id="delete-${note._id}" class="delete" data-id="${note._id}">Delete</button>
 					<button id="edit-${note._id}" class="edit" data-id="${note._id}">Edit</button>
 				</div>
@@ -57,6 +57,7 @@ export const onHandleSubmit = element => {
 			element['title'].value = ''
 			element['description'].value = ''
 		}
+		// reset form
 		savedId = ''
 		title.value = ''
 		description.value = ''

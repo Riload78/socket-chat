@@ -13,8 +13,8 @@ const renderNote = note => {
 				<h2>${note.title}</h2>
 				<p>${note.description}</p>
 				<div class="action">
-					<button id="delete-${note._id}" class="delete" data-id="${note._id}">Delete</button>
-					<button id="edit-${note._id}" class="edit" data-id="${note._id}">Edit</button>
+					<button id="delete-${note._id}" class="delete" data-id="${note._id}">Eliminar</button>
+					<button id="edit-${note._id}" class="edit" data-id="${note._id}">Editar</button>
 				</div>
 			</div>
 		`
